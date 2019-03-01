@@ -14,9 +14,9 @@ def expand_array_in_blocks(m, block_length, offset):
     output = np.ndarray((r, c), dtype=m.dtype)
     dst = output.ctypes.data
     frame_size = m.strides[0]
-    for i in xrange(r):
+    for i in range(r):
         src = m.ctypes.data + int((i + offset) * frame_size)
-        for j in xrange(block_length):
+        for j in range(block_length):
             ctypes.memmove(dst, src, frame_size)
             dst += int(frame_size)
             src += int(frame_size)

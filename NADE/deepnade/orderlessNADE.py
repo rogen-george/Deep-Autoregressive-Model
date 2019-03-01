@@ -128,7 +128,7 @@ def main():
 
     if options.layerwise:
         # Pretrain layerwise
-        for l in xrange(1, options.hlayers + 1):
+        for l in range(1, options.hlayers + 1):
             if l == 1:
                 nade.initialize_parameters_from_dataset(training_dataset)
             else:
@@ -146,8 +146,7 @@ def main():
         #    trainer.set_weight_decay_rate(options.wd)
             trainer.add_controller(TrainingController.NaNBreaker())
             # Instrument the training
-            trainer.add_instrumentation(Instrumentation.Instrumentation([console, textfile_log, hdf5_backend],
-                                                                        Instrumentation.Function("training_loss", lambda ins: ins.get_training_loss())))
+            trainer.add_instrumentation(Instrumentation.Instrumentation([console, textfile_log, hdf5_backend], Instrumentation.Function("training_loss", lambda ins: ins.get_training_loss())))
             trainer.add_instrumentation(Instrumentation.Instrumentation([console, textfile_log, hdf5_backend], Instrumentation.Configuration()))
             trainer.add_instrumentation(Instrumentation.Instrumentation([console, textfile_log, hdf5_backend], Instrumentation.Timestamp()))
             # Train
@@ -172,14 +171,10 @@ def main():
 #    trainer.set_weight_decay_rate(options.wd)
     trainer.add_controller(TrainingController.NaNBreaker())
     # Instrument the training
-    trainer.add_instrumentation(Instrumentation.Instrumentation([console, textfile_log, hdf5_backend],
-                                                                Instrumentation.Function("training_loss", lambda ins: ins.get_training_loss())))
+    trainer.add_instrumentation(Instrumentation.Instrumentation([console, textfile_log, hdf5_backend], Instrumentation.Function("training_loss", lambda ins: ins.get_training_loss())))
     if not options.no_validation:
-        trainer.add_instrumentation(Instrumentation.Instrumentation([console],
-                                                                    validation_loss_measurement))
-        trainer.add_instrumentation(Instrumentation.Instrumentation([hdf5_backend],
-                                                                    validation_loss_measurement,
-                                                                    at_lowest=[Instrumentation.Parameters()]))
+        trainer.add_instrumentation(Instrumentation.Instrumentation([console], validation_loss_measurement))
+        trainer.add_instrumentation(Instrumentation.Instrumentation([hdf5_backend], validation_loss_measurement, at_lowest=[Instrumentation.Parameters()]))
     trainer.add_instrumentation(Instrumentation.Instrumentation([console, textfile_log, hdf5_backend], Instrumentation.Configuration()))
     # trainer.add_instrumentation(Instrumentation.Instrumentation([hdf5_backend], Instrumentation.Parameters(), every = 10))
     trainer.add_instrumentation(Instrumentation.Instrumentation([console, textfile_log, hdf5_backend], Instrumentation.Timestamp()))
@@ -200,7 +195,7 @@ def main():
             hdf5_backend.write([], "training_loss", training_likelihood)
         val_ests = []
         test_ests = []
-        for i in xrange(options.summary_orderings):
+        for i in range(options.summary_orderings):
             nade.setup_n_orderings(n=1)
             if not options.no_validation:
                 val_ests.append(nade.estimate_loglikelihood_for_dataset(validation_dataset))

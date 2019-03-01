@@ -14,8 +14,8 @@ class ParameterInitialiser(object):
     #TODO: Should accept a shape, instead of the value of the 2 dimensions
     def get_values(self, n_visible, n_hidden = 1):
         w = np.zeros((n_visible, n_hidden), dtype = np.float32)
-        for i in xrange(n_visible):
-            for j in xrange(n_hidden):
+        for i in range(n_visible):
+            for j in range(n_hidden):
                 w[i,j] = self.get_value()
         return w
 

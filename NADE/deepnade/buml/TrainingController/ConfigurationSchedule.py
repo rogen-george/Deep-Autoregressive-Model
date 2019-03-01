@@ -8,7 +8,7 @@ class ConfigurationSchedule(TrainingController):
         self.index = 0
 
     def before_training_iteration(self, training_method):
-        for i in xrange(len(self.schedule)):
+        for i in range(len(self.schedule)):
             if training_method.epoch < self.schedule[i][0]:
                 break
         training_method.__getattribute__("set_" + self.parameter_name)(self.schedule[i][1])

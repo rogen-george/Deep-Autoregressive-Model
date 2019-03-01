@@ -14,27 +14,25 @@ def has_parameter(param_name, default_value=None, theano_param=False, theano_typ
                 return self.__getattribute__(param_name).get_value()
 
             def setter(self, value):
-                return self.__getattribute__(param_name).set_value(np.array(value,
-                                                                 dtype=theano_type))
+                return setattr(self, param_name, np.array(value, dtype=theano_type))
+                # return self.__getattribute__(param_name).set_value(np.array(value, dtype=theano_type))
 
             def new_init(self, *args, **kwargs):
-                setattr(self, param_name, theano.shared(np.array(default_value,
-                                                                 dtype=theano_type),
-                                                        param_name))
-                setattr(self, "get_" + param_name, types.MethodType(getter, self, self.__class__))
-                setattr(self, "set_" + param_name, types.MethodType(setter, self, self.__class__))
+                setattr(self, param_name, theano.shared(np.array(default_value, dtype=theano_type), param_name))
+                setattr(self, "get_" + param_name, types.MethodType(getter, self.__class__))
+                setattr(self, "set_" + param_name, types.MethodType(setter, self.__class__))
                 original_init(self, *args, **kwargs)
         else:
             def getter(self):
                 return self.__getattribute__(param_name)
 
             def setter(self, value):
-                return self.__setattr__(param_name, value)
+                return setattr(self, param_name, value)
 
             def new_init(self, *args, **kwargs):
                 setattr(self, param_name, default_value)
-                setattr(self, "get_" + param_name, types.MethodType(getter, self, self.__class__))
-                setattr(self, "set_" + param_name, types.MethodType(setter, self, self.__class__))
+                setattr(self, "get_" + param_name, types.MethodType(getter, self.__class__))
+                setattr(self, "set_" + param_name, types.MethodType(setter, self.__class__))
                 original_init(self, *args, **kwargs)
         setattr(cls, "__init__", new_init)
         try:
@@ -46,7 +44,8 @@ def has_parameter(param_name, default_value=None, theano_param=False, theano_typ
 
 
 @has_parameter("datasets", None)
-class Optimizer(Instrumentable):
+class Optimizer():
+# class Optimizer(Instrumentable): # CHANGE HERE
     def __init__(self, model, loss):
         self.model = model
         self.loss = loss

@@ -10,7 +10,7 @@ def create_dropout_masks(route, fname, dimensionality, ks=1000):
     ks = thousand of masks to create (1e6 masks by default)
     """
     hdf5_backend = Backends.HDF5(route, fname)
-    for i in xrange(ks):
+    for i in range(ks):
         mask = random.random_binary_mask((dimensionality, 1000), np.random.randint(dimensionality, size=1000))
         mask = mask.astype(floatX)
         hdf5_backend.write([], "masks/%d/masks" % i, mask.T)

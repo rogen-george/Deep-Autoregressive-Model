@@ -20,7 +20,7 @@ class Sparse(ParameterInitialiser):
         if len(shape) == 1:
             return sparse_vector(shape[0], self.sparse_connections)
         else:
-            return np.asarray([self.get_tensor(shape[1:]) for i in xrange(shape[0])])
+            return np.asarray([self.get_tensor(shape[1:]) for i in range(shape[0])])
 
     def get_values(self, n_visible, n_hidden=1):
         # Sparse can give the number of non-zero connections or the proportion of units from the visible layers to which each hidden unit connects

@@ -234,8 +234,8 @@ class NonLinearityParameter(Parameter):
 
     def add_to_model(self, model):
         self.model = model
-        self.value = self.options.items()[0][0]
-        setattr(model, self.name, self.options.items()[0][1][0])
+        self.value = list(self.options.items())[0][0]
+        setattr(model, self.name, list(self.options.items())[0][1][0])
 
     def set_value(self, value):
         self.value = value
@@ -249,4 +249,3 @@ class NonLinearityParameter(Parameter):
 
     def get_name(self):
         return self.value
-

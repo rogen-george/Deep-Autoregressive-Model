@@ -85,8 +85,8 @@ def load_model(model_filename):
 def plot_examples(nade, dataset, shape, name, rows=5, cols=10):    
     #Show some samples
     images = list()
-    for row in xrange(rows):                     
-        for i in xrange(cols):
+    for row in range(rows):                     
+        for i in range(cols):
             nade.setup_n_orderings(n=1)
             sample = dataset.sample_data(1)[0].T
             dens = nade.logdensity(sample)
@@ -95,8 +95,8 @@ def plot_examples(nade, dataset, shape, name, rows=5, cols=10):
     
     plt.figure(figsize=(0.5*cols,0.5*rows), dpi=100)
     plt.gray()            
-    for row in xrange(rows):                     
-        for col in xrange(cols):
+    for row in range(rows):                     
+        for col in range(cols):
             i = row*cols+col
             sample, dens = images[i]
             plt.subplot(rows, cols, i+1)
@@ -109,8 +109,8 @@ def plot_examples(nade, dataset, shape, name, rows=5, cols=10):
 def plot_samples(nade, shape, name, rows=5, cols=10):    
     #Show some samples
     images = list()
-    for row in xrange(rows):                     
-        for i in xrange(cols):
+    for row in range(rows):                     
+        for i in range(cols):
             nade.setup_n_orderings(n=1)
             sample = nade.sample(1)[:,0]
             dens = nade.logdensity(sample[:, np.newaxis])
@@ -119,8 +119,8 @@ def plot_samples(nade, shape, name, rows=5, cols=10):
     
     plt.figure(figsize=(0.5*cols,0.5*rows), dpi=100)
     plt.gray()            
-    for row in xrange(rows):                     
-        for col in xrange(cols):
+    for row in range(rows):                     
+        for col in range(cols):
             i = row*cols+col
             sample, dens = images[i]
             plt.subplot(rows, cols, i+1)
@@ -143,7 +143,7 @@ def inpaint_digits_(dataset, shape, model, n_examples = 5, delete_shape = (10,10
     plt.figure(figsize=(5,5), dpi=100)
     plt.gray()
     cols = 2 + n_samples
-    for row in xrange(n_examples):
+    for row in range(n_examples):
         # Original
         plt.subplot(n_examples, cols, row*cols+1)
         plot_sample(data[row,:], shape, origin="upper")        
@@ -160,7 +160,7 @@ def inpaint_digits(dataset, shape, model, n_examples = 5, delete_shape = (10,10)
     n_examples = data.shape[0]
     
     #Generate a random region to delete
-    regions = [ (np.random.randint(shape[0]-delete_shape[0]+1), np.random.randint(shape[1]-delete_shape[1]+1)) for i in xrange(n_examples)]
+    regions = [ (np.random.randint(shape[0]-delete_shape[0]+1), np.random.randint(shape[1]-delete_shape[1]+1)) for i in range(n_examples)]
     print(regions)
     regions = [(11,5), (11,5), (11,5), (4,13), (4,13), (4,13)]
     
@@ -189,7 +189,7 @@ def inpaint_digits(dataset, shape, model, n_examples = 5, delete_shape = (10,10)
     plt.figure(figsize=(5,5), dpi=100)
     plt.gray()
     cols = 2 + n_samples
-    for row in xrange(n_examples):
+    for row in range(n_examples):
         # Original
         plt.subplot(n_examples, cols, row*cols+1)
         plot_sample(data[row,:], shape, origin="upper")
@@ -200,7 +200,7 @@ def inpaint_digits(dataset, shape, model, n_examples = 5, delete_shape = (10,10)
         plt.gca().add_patch(plt.Rectangle(regions[row], delete_shape[0], delete_shape[1], facecolor="red", edgecolor="red"))        
         plt.title("%.2f" % marginal_densities[row])        
         # Samples
-        for j in xrange(n_samples):
+        for j in range(n_samples):
             plt.subplot(n_examples, cols, row*cols+3+j)
             plot_sample(samples[row][:,j], shape, origin="upper")
     plt.subplots_adjust(left=0.01, right=0.99, top=0.95, bottom=0.01, hspace=0.40, wspace=0.04)
@@ -217,13 +217,13 @@ def plot_RF_of_ps(rf, sample_shape):
 def plot_RFs(name, nade, sample_shape, rows=5, cols=10):
     rf_sizes = []
     W = nade.W1
-    for i in xrange(W.shape[1]):
+    for i in range(W.shape[1]):
         rf_sizes.append((i, -(W[:,i]**2).sum()))
     rf_sizes.sort(key = lambda x: x[1])
     plt.figure(figsize=(0.5*cols,0.5*rows), dpi=100)    
     plt.gray()
-    for i in xrange(rows):
-        for j in xrange(cols):
+    for i in range(rows):
+        for j in range(cols):
             n = i*cols+j                
             plt.subplot(rows,cols, n+1)
             rf = nade.W1[:,rf_sizes[n][0]]
@@ -233,8 +233,8 @@ def plot_RFs(name, nade, sample_shape, rows=5, cols=10):
     #plt.savefig(os.path.join(DESTINATION_PATH, name + "_W1.pdf"))    
     plt.figure(figsize=(0.5*cols,0.5*rows), dpi=100)
     plt.gray()
-    for i in xrange(rows):
-        for j in xrange(cols):
+    for i in range(rows):
+        for j in range(cols):
             n = i*cols+j
             plt.subplot(rows,cols, n+1)
             rf = np.resize(nade.Wflags[:,rf_sizes[n][0]], np.prod(sample_shape)).reshape(sample_shape)
@@ -245,8 +245,8 @@ def plot_RFs(name, nade, sample_shape, rows=5, cols=10):
     
     plt.figure(figsize=(0.5*cols,0.5*rows), dpi=100)
     plt.gray()
-    for i in xrange(rows):
-        for j in xrange(cols):
+    for i in range(rows):
+        for j in range(cols):
             n = i*cols+j
             plt.subplot(rows,cols, n+1)
             w  = nade.W1[:,rf_sizes[n][0]]
@@ -263,8 +263,8 @@ def plot_RFs(name, nade, sample_shape, rows=5, cols=10):
 
     plt.figure(figsize=(0.5*cols,0.5*rows), dpi=100)
     plt.gray()
-    for i in xrange(rows):
-        for j in xrange(cols):
+    for i in range(rows):
+        for j in range(cols):
             n = i*cols+j
             plt.subplot(rows,cols, n+1)
             w  = nade.W1[:,rf_sizes[n][0]]
@@ -362,7 +362,7 @@ def main():
     print("Creating random orderings")
     orderings = list()    
     #orderings.append(range(nade.n_visible))
-    for i in xrange(n_orderings):
+    for i in range(n_orderings):
         o = range(nade.n_visible)
         np.random.shuffle(o)
         orderings.append(o)
@@ -384,21 +384,21 @@ def main():
     if show_RFs:
         rf_sizes = []
         W = nade.W1.get_value()
-        for i in xrange(W.shape[1]):
+        for i in range(W.shape[1]):
             rf_sizes.append((i, -(W[:,i]**2).sum()))
         rf_sizes.sort(key = lambda x: x[1])
         plt.figure()
         plt.gray()
-        for i in xrange(10):
-            for j in xrange(10):
+        for i in range(10):
+            for j in range(10):
                 n = i*10+j                
                 plt.subplot(10,10, n+1)
                 rf = nade.Wflags.get_value()[:,rf_sizes[n][0]]
                 plot_RF(rf, sample_shape)
         plt.figure()
         plt.gray()
-        for i in xrange(10):
-            for j in xrange(10):
+        for i in range(10):
+            for j in range(10):
                 n = i*10+j
                 plt.subplot(10,10, n+1)
                 rf = np.resize(nade.W1.get_value()[:,rf_sizes[n][0]], np.prod(sample_shape)).reshape(sample_shape)
@@ -410,7 +410,7 @@ def main():
         images = []       
         for row,o in enumerate(orderings):                     
             samples = nade.sample(n_samples)
-            for i in xrange(samples.shape[1]):
+            for i in range(samples.shape[1]):
                 nade.setup_n_orderings(n=1)
                 sample = samples[:,i]                
                 dens = nade.logdensity(sample[:, np.newaxis])
@@ -424,7 +424,7 @@ def main():
         plt.figure()
         plt.gray()        
         for row,o in enumerate(orderings):                     
-            for i in xrange(samples.shape[1]):
+            for i in range(samples.shape[1]):
                 plt.subplot(n_orderings, n_samples, row*n_samples+i+1)
                 im_ll = images[row*n_samples+i]
                 plot_sample(im_ll[0], sample_shape)                
@@ -436,7 +436,7 @@ def main():
         images = []
         for row,o in enumerate(orderings):                     
             samples = test_dataset.sample_data(n_samples)[0].T
-            for i in xrange(samples.shape[1]):
+            for i in range(samples.shape[1]):
                 nade.setup_n_orderings(n=1)                
                 sample = samples[:,i]
                 dens = nade.logdensity(sample[:, np.newaxis])
@@ -450,7 +450,7 @@ def main():
         plt.figure()
         plt.gray()        
         for row,o in enumerate(orderings):                     
-            for i in xrange(samples.shape[1]):
+            for i in range(samples.shape[1]):
                 plt.subplot(n_orderings, n_samples, row*n_samples+i+1)
                 im_ll = images[row*n_samples+i]
                 plot_sample(im_ll[0], sample_shape)                
@@ -464,14 +464,14 @@ def main():
         sample = nade.sample(n)
         plt.figure()
         plt.gray()
-        for it in xrange(10):        
-            for s in xrange(n):
+        for it in range(10):        
+            for s in range(n):
                 logdensities = nade.logdensity(sample)
                 plt.subplot(n,10, s*10+it+1)
                 plot_sample(sample[:,s], sample_shape)            
                 plt.title("%.1f" % logdensities[s])
             #i = np.random.randint(sample.shape[0])
-            for i in xrange(sample.shape[0]):
+            for i in range(sample.shape[0]):
                 j = np.random.randint(sample.shape[0])
                 #mask = sample            
                 mask = np.ones_like(sample)        

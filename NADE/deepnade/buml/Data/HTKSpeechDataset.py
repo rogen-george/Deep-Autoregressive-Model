@@ -226,17 +226,17 @@ class HTKSpeechDataset(object):
         f.close()
         return Dataset(fname,
                        ".*/.*/.*/.*",
-                       tuple(str(i) for i in xrange(len(y))),
+                       tuple(str(i) for i in range(len(y))),
                        delete_after_use = delete)
 
 #    def get_data(self, n = None, proportion = None, accept_less = True):
 #        if n is None:
-#            total = sum([self.get_file_shape(0, i)[0] for i in xrange(len(self.file_paths))])
+#            total = sum([self.get_file_shape(0, i)[0] for i in range(len(self.file_paths))])
 #            if proportion is not None:
 #                n = total * proportion
 #            else:
 #                n = total
-#        data = tuple(np.empty((n, self.get_dimensionality(i))) for i in xrange(self.get_arity()))
+#        data = tuple(np.empty((n, self.get_dimensionality(i))) for i in range(self.get_arity()))
 #        row = 0
 #        for fs in self.file_iterator():
 #            for i,f in enumerate(fs):

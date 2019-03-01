@@ -139,7 +139,7 @@ class OrderlessMoGNADE(NADE):
         else:
             self.n_orderings = n
             from copy import copy
-            for _ in xrange(self.n_orderings):
+            for _ in range(self.n_orderings):
                 o = range(self.n_visible)
                 np.random.shuffle(o)
                 self.orderings.append(copy(o))
@@ -168,10 +168,10 @@ class OrderlessMoGNADE(NADE):
 
         for o_index, o in enumerate(self.orderings):
             a = np.zeros((B, self.n_hidden)) + b1
-            for j in xrange(self.n_visible):
+            for j in range(self.n_visible):
                 i = o[j]
                 h = nl(a)
-                for l in xrange(self.n_layers - 1):
+                for l in range(self.n_layers - 1):
                     h = nl(np.dot(h, Ws[l]) + bs[l])
                 z_alpha = np.dot(h, V_alpha[i]) + b_alpha[i]
                 z_mu = np.dot(h, V_mu[i]) + b_mu[i]
@@ -190,7 +190,7 @@ class OrderlessMoGNADE(NADE):
         n = 0
         x_iterator = x_dataset.iterator(batch_size=minibatch_size, get_smaller_final_batch=True)
         m_iterator = masks_dataset.iterator(batch_size=minibatch_size)
-        for _ in xrange(loops):
+        for _ in range(loops):
             for x, m in zip(x_iterator, m_iterator):
                 x = x.T  # VxB
                 batch_size = x.shape[1]
@@ -211,7 +211,7 @@ class OrderlessMoGNADE(NADE):
         d = mask.sum(1)  # d is the 1-based index of the dimension whose value to infer (not the size of the context)
         masked_input = x * mask  # BxD
         h = self.nonlinearity(T.dot(masked_input, self.W1) + T.dot(mask, self.Wflags) + self.b1)  # BxH
-        for l in xrange(self.n_layers - 1):
+        for l in range(self.n_layers - 1):
             h = self.nonlinearity(T.dot(h, self.Ws[l]) + self.bs[l])  # BxH
         z_alpha = T.tensordot(h, self.V_alpha, [[1], [1]]) + T.shape_padleft(self.b_alpha)
         z_mu = T.tensordot(h, self.V_mu, [[1], [1]]) + T.shape_padleft(self.b_mu)
@@ -296,14 +296,14 @@ class OrderlessMoGNADE(NADE):
         b_sigma = self.b_sigma.get_value()
         nl = self.parameters["nonlinearity"].get_numpy_f()
         samples = np.zeros((self.n_visible, n))
-        for s in xrange(n):
+        for s in range(n):
             # Sample an ordering
             ordering = self.orderings[np.random.randint(len(self.orderings))]
             a = np.zeros((self.n_hidden,)) + b1  # H
-            for j in xrange(self.n_visible):
+            for j in range(self.n_visible):
                 i = ordering[j]
                 h = nl(a)
-                for l in xrange(self.n_layers - 1):
+                for l in range(self.n_layers - 1):
                     h = nl(np.dot(h, Ws[l]) + bs[l])
                 Alpha = Utils.nnet.softmax(np.dot(h, V_alpha[i]) + b_alpha[i])  # C
                 Mu = np.dot(h, V_mu[i]) + b_mu[i]  # C
@@ -333,10 +333,10 @@ class OrderlessMoGNADE(NADE):
         conditionals = np.zeros((self.n_orderings, self.n_visible))
         for o_index, o in enumerate(self.orderings):
             a = np.zeros((self.n_hidden,)) + b1
-            for j in xrange(self.n_visible):
+            for j in range(self.n_visible):
                 i = o[j]
                 h = nl(a)
-                for l in xrange(self.n_layers - 1):
+                for l in range(self.n_layers - 1):
                     h = nl(np.dot(h, Ws[l]) + bs[l])
                 z_alpha = np.dot(h, V_alpha[i]) + b_alpha[i]
                 z_mu = np.dot(h, V_mu[i]) + b_mu[i]
@@ -368,10 +368,10 @@ class OrderlessMoGNADE(NADE):
         conditionals = np.zeros((self.n_orderings, self.n_visible, len(ys)))
         for o_index, o in enumerate(self.orderings):
             a = np.zeros((self.n_hidden,)) + b1
-            for j in xrange(self.n_visible):
+            for j in range(self.n_visible):
                 i = o[j]
                 h = nl(a)
-                for l in xrange(self.n_layers - 1):
+                for l in range(self.n_layers - 1):
                     h = nl(np.dot(h, Ws[l]) + bs[l])
                 z_alpha = np.dot(h, V_alpha[i]) + b_alpha[i]
                 z_mu = np.dot(h, V_mu[i]) + b_mu[i]

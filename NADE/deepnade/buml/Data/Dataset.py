@@ -88,14 +88,14 @@ class Dataset(object):
         """
         if n is None:
             assert(proportion is not None)
-            total = sum([self.get_file_shape(0, i)[0] for i in xrange(len(self.file_paths))])
+            total = sum([self.get_file_shape(0, i)[0] for i in range(len(self.file_paths))])
             n = total * proportion
-        data = tuple(np.empty((n, self.get_dimensionality(i)), dtype=self.get_type(i)) for i in xrange(self.get_arity()))
+        data = tuple(np.empty((n, self.get_dimensionality(i)), dtype=self.get_type(i)) for i in range(self.get_arity()))
         row = 0
         while row < n:
             file_index = np.random.randint(0, self.get_n_files())
             index = np.random.randint(0, self.get_file_shape(0, file_index)[0] - (self.block_length - 1))
-            for i in xrange(self.get_arity()):
+            for i in range(self.get_arity()):
                 data[i][row] = self.get_file(i, file_index)[index:index + self.block_lengths[i], :].flatten()
             row += 1
         return data
@@ -128,20 +128,20 @@ class DatasetIterator(object):
             self.return_type = lambda x: x[0]
         else:
             self.return_type = tuple
-        self.element_dimensionalities = [self.dataset.get_dimensionality(i) for i in xrange(self.arity)]
-        self.element_sizes = [np.int(self.dataset.get_file(i, 0).strides[0]) for i in xrange(self.arity)]
-        self.element_types = [self.dataset.get_type(i) for i in xrange(self.arity)]
+        self.element_dimensionalities = [self.dataset.get_dimensionality(i) for i in range(self.arity)]
+        self.element_sizes = [np.int(self.dataset.get_file(i, 0).strides[0]) for i in range(self.arity)]
+        self.element_types = [self.dataset.get_type(i) for i in range(self.arity)]
         self.element_block_lengths = self.dataset.block_lengths
         self.element_offsets = self.dataset.offsets
         self.block_length = self.dataset.block_length
         self.set_batch_size(batch_size, get_smaller_final_batch)
         # srcs
-        self.n_srcs = np.sum([np.int(self.dataset.get_n_blocks_in_file(i)) for i in xrange(self.dataset.get_n_files())])
-        self.srcs = [np.zeros(self.n_srcs, dtype="int") for i in xrange(self.dataset.get_arity())]
+        self.n_srcs = np.sum([np.int(self.dataset.get_n_blocks_in_file(i)) for i in range(self.dataset.get_n_files())])
+        self.srcs = [np.zeros(self.n_srcs, dtype="int") for i in range(self.dataset.get_arity())]
         src_count = 0
-        for f in xrange(self.dataset.get_n_files()):
-            for i in xrange(self.dataset.get_n_blocks_in_file(f)):
-                for e in xrange(self.dataset.get_arity()):
+        for f in range(self.dataset.get_n_files()):
+            for i in range(self.dataset.get_n_blocks_in_file(f)):
+                for e in range(self.dataset.get_arity()):
                     self.srcs[e][src_count] = self.dataset.files[f][e].ctypes.data + self.element_sizes[e] * (self.element_offsets[e] +  i)
                 src_count += 1
         self.restart()
@@ -149,7 +149,7 @@ class DatasetIterator(object):
     def set_batch_size(self, n, get_smaller_final_batch):
         self.batch_size = np.int(n)
         self.get_smaller_final_batch = get_smaller_final_batch
-        self.batches = [np.empty((self.batch_size, self.element_dimensionalities[i]), dtype=self.element_types[i]) for i in xrange(self.arity)]
+        self.batches = [np.empty((self.batch_size, self.element_dimensionalities[i]), dtype=self.element_types[i]) for i in range(self.arity)]
 
     def get_arity(self):
         return self.arity
@@ -181,10 +181,10 @@ class DatasetIterator(object):
         if self.batches_returned == self.n_batches or self.finished:
             raise StopIteration
         elif self.srcs_index + self.batch_size < self.n_srcs:
-            for j in xrange(self.arity):
+            for j in range(self.arity):
                 dst = np.int(self.batches[j].ctypes.data)
                 size = self.element_sizes[j] * self.element_block_lengths[j]
-                for i in xrange(self.batch_size):
+                for i in range(self.batch_size):
                     n = self.srcs_order[self.srcs_index + i]
                     ctypes.memmove(dst, np.int(self.srcs[j][n]), size)
                     dst += size
@@ -196,10 +196,10 @@ class DatasetIterator(object):
             if srcs_left ==0 or not self.get_smaller_final_batch:
                 raise StopIteration
             else:
-                for j in xrange(self.arity):
+                for j in range(self.arity):
                     dst = np.int(self.batches[j].ctypes.data)
                     size = self.element_sizes[j] * self.element_block_lengths[j]
-                    for i in xrange(srcs_left):
+                    for i in range(srcs_left):
                         n = self.srcs_order[self.srcs_index + i]
                         ctypes.memmove(dst, np.int(self.srcs[j][n]), size)
                         dst += size
@@ -214,10 +214,10 @@ class DatasetIterator(object):
                     raise "Dataset doesn't even contain one minibatch"
                 else:
                     srcs_left = self.n_srcs - self.srcs_index
-                    for j in xrange(self.arity):
+                    for j in range(self.arity):
                         dst = np.int(self.batches[j].ctypes.data)
                         size = self.element_sizes[j] * self.element_block_lengths[j]
-                        for i in xrange(srcs_left):
+                        for i in range(srcs_left):
                             n = self.srcs_order[self.srcs_index + i]
                             ctypes.memmove(dst, np.int(self.srcs[j][n]), size)
                             dst += size
@@ -225,10 +225,10 @@ class DatasetIterator(object):
                     self.batches_returned += 1
                     return self.return_type([b[0:srcs_left, :] for b in self.batches])
             else:
-                for j in xrange(self.arity):
+                for j in range(self.arity):
                     dst = np.int(self.batches[j].ctypes.data)
                     size = self.element_sizes[j] * self.element_block_lengths[j]
-                    for i in xrange(self.batch_size):
+                    for i in range(self.batch_size):
                         n = self.srcs_order[self.srcs_index + i]
                         ctypes.memmove(dst, np.int(self.srcs[j][n]), size)
                         dst += size
@@ -251,7 +251,7 @@ class DatasetFileIterator(object):
             raise StopIteration
         else:
             self.f_index += 1
-            x = [self.dataset.get_file(e, self.f_index - 1) for e in xrange(self.dataset.get_arity())]
+            x = [self.dataset.get_file(e, self.f_index - 1) for e in range(self.dataset.get_arity())]
             return tuple(x)
 
 def load_dataset_from_hdf5(filename, entries_regexp, element_names, block_length=1, use_blocks=None, offsets=None):

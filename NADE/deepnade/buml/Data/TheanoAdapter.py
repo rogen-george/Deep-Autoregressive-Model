@@ -41,7 +41,7 @@ class TheanoDatasetIteratorAdapter(object):
             self.buffers[0].set_value(tmp)
             self.datapoints_in_buffer = tmp.shape[0]
         else:
-            for i in xrange(self.arity):
+            for i in range(self.arity):
                 self.buffers[i].set_value(tmp[i])
             self.datapoints_in_buffer = tmp[0].shape[0]
         self.buffer_index = 0
@@ -55,7 +55,7 @@ class TheanoDatasetIteratorAdapter(object):
         while self.buffer_index + self.batch_size > self.datapoints_in_buffer:
             self.fill_buffer()
         # Return a batch and increment the buffer index
-        for i in xrange(self.arity):
+        for i in range(self.arity):
             self.minibatch[i].set_value(self.buffers[i].get_value(borrow=True, return_internal_type=True)[self.buffer_index:self.buffer_index + self.batch_size], borrow=True)
         self.buffer_index += self.batch_size
         return self.minibatch

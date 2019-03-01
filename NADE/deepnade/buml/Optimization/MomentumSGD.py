@@ -1,11 +1,12 @@
 from Optimization.Optimizer import has_parameter
+from Instrumentation.Instrumentable import Instrumentable
 import numpy as np
 import theano
 from Optimization.SGD import SGD
 
 
 @has_parameter("momentum", 0.0, theano_param=True)
-class MomentumSGD(SGD):
+class MomentumSGD(SGD):   # CHANGE HERE
     def __init__(self, model, loss):
         SGD.__init__(self, model, loss)
 

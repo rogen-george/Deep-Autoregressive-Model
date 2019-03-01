@@ -72,8 +72,8 @@ class OrderlessBernoulliNADE(NADE):
         else:
             self.n_orderings = n
             from copy import copy
-            for _ in xrange(self.n_orderings):
-                o = range(self.n_visible)
+            for _ in range(self.n_orderings):
+                o = list(range(self.n_visible))
                 np.random.shuffle(o)
                 self.orderings.append(copy(o))
 
@@ -120,11 +120,11 @@ class OrderlessBernoulliNADE(NADE):
         for o_index, o in enumerate(self.orderings):
             a = np.zeros((B, self.n_hidden))
             input_mask_contribution = np.zeros((B, self.n_hidden))
-            for j in xrange(self.n_visible):
+            for j in range(self.n_visible):
                 i = o[j]
                 x_i = x[i]
                 h = nl(input_mask_contribution + a + b1)
-                for l in xrange(self.n_layers - 1):
+                for l in range(self.n_layers - 1):
                     h = nl(np.dot(h, Ws[l]) + bs[l])
                 t = np.dot(h, V[i]) + c[i]
                 p_xi_is_one = sigmoid(t) * 0.9999 + 0.0001 * 0.5
@@ -139,7 +139,7 @@ class OrderlessBernoulliNADE(NADE):
         n = 0
         x_iterator = x_dataset.iterator(batch_size=minibatch_size, get_smaller_final_batch=True)
         m_iterator = masks_dataset.iterator(batch_size=minibatch_size)
-        for _ in xrange(loops):
+        for _ in range(loops):
             for x, m in zip(x_iterator, m_iterator):
                 x = x.T  # VxB
                 batch_size = x.shape[1]
@@ -161,7 +161,7 @@ class OrderlessBernoulliNADE(NADE):
         d = mask.sum(1)  # d is the 1-based index of the dimension whose value to infer (not the size of the context)
         masked_input = x * mask  # BxD
         h = self.nonlinearity(T.dot(masked_input, self.W1) + T.dot(mask, self.Wflags) + self.b1)  # BxH
-        for l in xrange(self.n_layers - 1):
+        for l in range(self.n_layers - 1):
             h = self.nonlinearity(T.dot(h, self.Ws[l]) + self.bs[l])  # BxH
         t = T.dot(h, self.V.T) + self.c  # BxD
         p_x_is_one = T.nnet.sigmoid(t) * constantX(0.9999) + constantX(0.0001 * 0.5)  # BxD
@@ -188,15 +188,15 @@ class OrderlessBernoulliNADE(NADE):
         c = self.c.get_value()
         nl = self.parameters["nonlinearity"].get_numpy_f()
         samples = np.zeros((self.n_visible, n))
-        for s in xrange(n):
+        for s in range(n):
             # Sample an ordering
             ordering = self.orderings[np.random.randint(len(self.orderings))]
             a = np.zeros((self.n_hidden,))  # H
             input_mask_contribution = np.zeros((self.n_hidden))
-            for j in xrange(self.n_visible):
+            for j in range(self.n_visible):
                 i = ordering[j]
                 h = nl(input_mask_contribution + a + b1)
-                for l in xrange(self.n_layers - 1):
+                for l in range(self.n_layers - 1):
                     h = nl(np.dot(h, Ws[l]) + bs[l])
                 t = np.dot(h, V[i]) + c[i]
                 p_xi_is_one = sigmoid(t) * 0.9999 + 0.0001 * 0.5  # B

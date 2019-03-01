@@ -180,9 +180,9 @@ class MoLaplaceNADE(MixtureNADE):
         b_sigma = self.b_sigma.get_value()
         activation_rescaling = self.activation_rescaling.get_value()
         samples = np.zeros((self.n_visible, n))
-        for s in xrange(n):
+        for s in range(n):
             a = np.zeros((self.n_hidden,))  # H
-            for i in xrange(self.n_visible):
+            for i in range(self.n_visible):
                 if i == 0:
                     a = W[i, :]
                 else:
@@ -215,6 +215,6 @@ class MoLaplaceNADE(MixtureNADE):
         Sigma = np.log(1.0 + np.exp((np.dot(h, V_sigma[i]) + b_sigma[i]) * 10)) / 10  # C
 
         def ld(x):
-            lds = np.array([scipy.stats.norm.logpdf(x, Mu[c], Sigma[c]) for c in xrange(self.n_components)])
+            lds = np.array([scipy.stats.norm.logpdf(x, Mu[c], Sigma[c]) for c in range(self.n_components)])
             return Utils.nnet.logsumexp(lds + np.log(alpha))
         return np.array([ld(x) for x in range])

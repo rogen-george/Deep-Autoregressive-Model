@@ -154,7 +154,7 @@ class SpeechDataset(object):
         f.close()
         return Dataset(fname,
                        self.entries_regexp,
-                       tuple(str(i) for i in xrange(len(y))),
+                       tuple(str(i) for i in range(len(y))),
                        delete_after_use = delete)
 
     def reduce(self, reduction_f, initial_accum):
@@ -187,17 +187,17 @@ class SpeechDataset(object):
 #        # Return the new dataset
 #        return Dataset(fname,
 #                       self.entries_regexp,
-#                       tuple(str(i) for i in xrange(len(y))),
+#                       tuple(str(i) for i in range(len(y))),
 #                       delete_after_use = delete)
     #TODO: Move to utils
     def get_data(self, n = None, proportion = None, accept_less = True):
         if n is None:
-            total = sum([self.get_file_shape(0, i)[0] for i in xrange(len(self.file_paths))])
+            total = sum([self.get_file_shape(0, i)[0] for i in range(len(self.file_paths))])
             if proportion is not None:
                 n = total * proportion
             else:
                 n = total
-        data = tuple(np.empty((n, self.get_dimensionality(i))) for i in xrange(self.get_arity()))
+        data = tuple(np.empty((n, self.get_dimensionality(i))) for i in range(self.get_arity()))
         row = 0
         for fs in self.file_iterator():
             for i,f in enumerate(fs):
@@ -218,7 +218,7 @@ class SpeechDataset(object):
         """
         if n is None:
             assert(proportion is not None)
-            total = sum([self.get_file_shape(0, i)[0] for i in xrange(len(self.file_paths))])
+            total = sum([self.get_file_shape(0, i)[0] for i in range(len(self.file_paths))])
             n = total * proportion
         data = np.empty((n, self.get_dimensionality(0)))
         row = 0
@@ -278,7 +278,7 @@ class LabeledSpeechDatasetIterator(object):
                 i = 0
                 tb0 = 0.5 * (self.dataset.frame_duration + (self.n_frames-1) * self.dataset.frame_time_shift)
                 time_step = self.dataset.frame_time_shift * self.frame_shift
-                for j in xrange(Data.n_blocks(inp.shape[0], self.n_frames, self.frame_shift)):
+                for j in range(Data.n_blocks(inp.shape[0], self.n_frames, self.frame_shift)):
                     # Time for the center of the block of frames
                     t = tb0 + time_step * j
                     # i is the index in the label file corresponding to that time
@@ -290,9 +290,9 @@ class LabeledSpeechDatasetIterator(object):
                     inp_src += int(self.frame_size * self.frame_shift)
             else: #Has frame indexes instead of times
                 i = 0
-#                for j in xrange(1+self.n_frames//2, Data.n_blocks(inp.shape[0], self.n_frames, self.frame_shift)):
+#                for j in range(1+self.n_frames//2, Data.n_blocks(inp.shape[0], self.n_frames, self.frame_shift)):
 #                    while j > times[i][1] and i < len(times)-1:
-                for j in xrange(Data.n_blocks(inp.shape[0], self.n_frames, self.frame_shift)):
+                for j in range(Data.n_blocks(inp.shape[0], self.n_frames, self.frame_shift)):
                     #while (self.n_frames//2 + j) > times[i][1] and i < len(times)-1:
                     while (self.n_frames//2 + j) >= times[i][1] and i < len(times)-1:
                         i+=1
@@ -351,7 +351,7 @@ class LabeledSpeechDatasetIterator(object):
         if self.batches_returned == self.max_batches:
             raise StopIteration
         self.batches_returned += 1
-        for i in xrange(self.batch_size):
+        for i in range(self.batch_size):
             try:
                 if self.srcs_index >= len(self.srcs):
                     self.fill_files_buffer()
@@ -361,7 +361,7 @@ class LabeledSpeechDatasetIterator(object):
                     ctypes.memmove(input_dst, inp_src, self.block_size)
                     input_dst += int(self.block_size)
                 else:
-                    for j in xrange(self.n_frames):
+                    for j in range(self.n_frames):
                         ctypes.memmove(input_dst, inp_src, self.frame_size)
                         input_dst += int(self.frame_size)
                         input_src += int(self.frame_size * self.frame_shift)
@@ -406,7 +406,7 @@ class SpeechDatasetIterator(object):
             self.input_files.append(inp)
             buffer_size += inp.shape[0] * inp.ctypes.strides[0]
             inp_src = inp.ctypes.data
-            for j in xrange(Data.n_blocks(inp.shape[0], self.n_frames, self.frame_shift)):
+            for j in range(Data.n_blocks(inp.shape[0], self.n_frames, self.frame_shift)):
                 self.srcs.append(inp_src)
                 # Add an entry to the list of addresses
                 inp_src += int(self.frame_size * self.frame_shift)
@@ -455,7 +455,7 @@ class SpeechDatasetIterator(object):
         if self.batches_returned == self.max_batches:
             raise StopIteration
         self.batches_returned += 1
-        for i in xrange(self.batch_size):
+        for i in range(self.batch_size):
             try:
                 if self.srcs_index >= len(self.srcs):
                     self.fill_files_buffer()
@@ -465,7 +465,7 @@ class SpeechDatasetIterator(object):
                     ctypes.memmove(input_dst, inp_src, self.block_size)
                     input_dst += int(self.block_size)
                 else:
-                    for j in xrange(self.n_frames):
+                    for j in range(self.n_frames):
                         ctypes.memmove(input_dst, inp_src, self.frame_size)
                         input_dst += int(self.frame_size)
                         input_src += int(self.frame_size * self.frame_shift)
@@ -506,7 +506,7 @@ class SpeechDatasetFileIterator(object):
                 output = []
                 times  = self.dataset.get_output_times_file(f_number)
                 labels = self.dataset.get_output_values_file(f_number)
-                for j in xrange(Data.n_blocks(acoustics_file.shape[0], self.dataset.n_frames, self.dataset.frame_shift)):
+                for j in range(Data.n_blocks(acoustics_file.shape[0], self.dataset.n_frames, self.dataset.frame_shift)):
                     while (self.dataset.n_frames//2 + j) >= times[i][1] and i < len(times)-1:
                         i+=1
                     output.append(labels[i])
@@ -530,7 +530,7 @@ def feed_forward_dataset(dataset, layers):
     #Create destination temporary file
     fname = tempfile.mktemp()
     f = h5py.File(fname, "w")
-    for i in xrange(dataset.get_n_files()):
+    for i in range(dataset.get_n_files()):
         inp = feedforward(dataset.get_input_file(i))
         f["/data/f%d/input" % (i)] = inp
         if dataset.has_output():

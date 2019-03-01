@@ -33,7 +33,7 @@ def bp_softmax(do, x):
 
 def bp_row_softmax(dW, W):
     o = np.zeros_like(W)
-    for i in xrange(W.shape[0]):
+    for i in range(W.shape[0]):
         o[i,:] = bp_softmax(dW[i,:], W[i,:])
     return o
 
