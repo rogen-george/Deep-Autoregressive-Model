@@ -121,18 +121,13 @@ if __name__ == '__main__':
     torch.cuda.manual_seed_all(42)
 
     # load the dataset
-    print("loading binarized mnist from", args.data_path)
+    print("loading binarized freeway dataset", args.data_path)
+    data = torch.ByteStorage.from_file(args.data_path)
+    print("data: ", data)
     mnist = np.load(args.data_path)
     xtr, xte = mnist['train_data'], mnist['valid_data']
-    print("XTR.SHAPE: ", xtr.shape)
-    #xtr = torch.from_numpy(xtr).cuda()
-    xtr = torch.from_numpy(xtr)
-    print("xtr_type: ", xtr.type())
-    print("xtr_float: ", xtr)
-    xtr = xtr.type(torch.ByteTensor)
-    print("xtr_type: ", xtr.type())
-    print("xtr_byte: ", xtr)
-    print("xtr.size(1): ", xtr.size(1))
+    xtr = torch.from_numpy(xtr).cuda()
+    print("xtr_type: ", xtr)
     xte = torch.from_numpy(xte).cuda()
 
     # construct model and ship to GPU
