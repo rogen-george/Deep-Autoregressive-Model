@@ -13,7 +13,7 @@ Neural Autoregressive Density Estimator (NADE) is the standard Bayesian Network 
 
 ##### 2. MADE:
 
-Masked Autoregressive Density Estimation (MADE) is a deep, generative autoencoder capable of learning hierarchies of distributed representations from data. Its an extension of NADE where all conditional distributions are learnt using a masked variational autoencoder. The masks are generated such that they sustain the autoregressive property of the model by dropping out suitable connections. Our implementation code for MADE with all the conducted experiments can be found in the MADE subfolder.
+Masked Autoregressive Density Estimation (MADE) is a deep, generative autoencoder capable of learning hierarchies of distributed representations from data. Its an extension of NADE where all conditional distributions are learnt using a masked variational autoencoder. The masks are generated such that they sustain the autoregressive property of the model by dropping out suitable connections. Our implementation code for MADE with all the conducted experiments can be found in the pytorch-MADE [subfolder](pytorch-MADE).
 
 ##### 3. GMM (as baseline)
 
