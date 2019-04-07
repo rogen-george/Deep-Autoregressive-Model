@@ -8,7 +8,9 @@ The final presentation can be found [here](Project_presentation.pdf) (relative l
 ### Models explored
 ##### 1. NADE:
 
-Neural Autoregressive Density Estimator (NADE) is the standard Bayesian Network model for density estimation in which the full joint probability of all random variables is represented as:
+Neural Autoregressive Density Estimator (NADE) is a Bayesian Network model for density estimation having an "autoregressive property" in which the full joint probability of all random variables is given as:
+
+$p(\textbf{x}) = \prod p(x_k|x_{<k})$
 
 
 ##### 2. MADE:
