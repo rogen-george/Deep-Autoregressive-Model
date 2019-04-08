@@ -51,7 +51,7 @@ GMM generated sample            |  MADE generated sample
 
 ### 3. Anime faces:
 
-GMM generated sample            |  MADE generated sample
+GMM generated samples            |  MADE generated samples
 :-------------------------:|:-------------------------:
 <img src="pytorch-MADE/sample_anime_gmm.png" width="250" height="250">  |   <img src="pytorch-MADE/sample_anime_made.png" width="250" height="250">
 
