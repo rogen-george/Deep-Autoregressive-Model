@@ -33,5 +33,16 @@ MADE is a deep, generative autoencoder capable of learning hierarchies of distri
 
 ## Results
 
+### 1. MNIST:
+
+<img src="pytorch-MADE/sample_mnist_gmm.png" style="float:left">
+<img src="pytorch-MADE/sample_mnist_made.png" style="float: right">
+
+### 2. Atari game frames:
+
+### 3. Anime faces:
+
+
+
 
 
