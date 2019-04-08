@@ -33,27 +33,27 @@ MADE is a deep, generative autoencoder capable of learning hierarchies of distri
 
 ## Results
 
-#### 1. MNIST:
+### 1. MNIST:
 
 GMM generated sample            |  MADE generated sample
 :-------------------------:|:-------------------------:
-<img src="pytorch-MADE/sample_mnist_gmm.png" width="50" height="50">  |   <img src="pytorch-MADE/sample_mnist_made.png" width="100" height="100">
+<img src="pytorch-MADE/sample_mnist_gmm.png" width="50" height="50">  |   <img src="pytorch-MADE/sample_mnist_made.png" width="50" height="50">
 
 
 
-#### 2. Atari game frames:
-
-GMM generated sample            |  MADE generated sample
-:-------------------------:|:-------------------------:
-<img src="pytorch-MADE/gmm_atari_sample.png" width="100" height="200">  |   <img src="pytorch-MADE/output_sample_atari1.png" width="100" height="200">
-
-
-
-#### 3. Anime faces:
+### 2. Atari game frames:
 
 GMM generated sample            |  MADE generated sample
 :-------------------------:|:-------------------------:
-<img src="pytorch-MADE/sample_anime_gmm.png" width="200" height="200">  |   <img src="pytorch-MADE/sample_anime_made.png" width="100" height="100">
+<img src="pytorch-MADE/gmm_atari_sample.png" width="200" height="200">  |   <img src="pytorch-MADE/output_sample_atari1.png" width="200" height="200">
+
+
+
+### 3. Anime faces:
+
+GMM generated sample            |  MADE generated sample
+:-------------------------:|:-------------------------:
+<img src="pytorch-MADE/sample_anime_gmm.png" width="200" height="200">  |   <img src="pytorch-MADE/sample_anime_made.png" width="200" height="200">
 
 
 
