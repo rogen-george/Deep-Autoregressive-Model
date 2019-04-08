@@ -6,27 +6,27 @@ In this project, we explore deep autoregressive models for density estimation su
 The final presentation can be found [here](Project_presentation.pdf) (relative link).
 
 ## Models explored
-### 1. NADE:
+### 1. Neural Autoregressive Density Estimator (NADE):
 
-![Alt text](imgs/nade_pgm.png?raw=true "Title")
+![Alt text](imgs/nade_pgm.png)
 
-Neural Autoregressive Density Estimator (NADE) is a Bayesian Network model for density estimation having an "autoregressive property" in which the full joint probability of all random variables is given as:
+NADE is a Bayesian Network model for density estimation having an "autoregressive property" in which the full joint probability of all random variables is given as:
 
-![Alt text](imgs/nade_pdf.png?raw=true "Title")
+![Alt text](imgs/nade_pdf.png)
 
 All of the conditional distributions are modelled by a neural network:
 
-![Alt text](imgs/nade_net.png?raw=true "Title")
+![Alt text](imgs/nade_net.png)
 
-![Alt text](imgs/nade_neteq.png?raw=true "Title")
+![Alt text](imgs/nade_neteq.png)
 
 
 
-### 2. MADE:
+### 2. Masked Autoregressive Density Estimation (MADE):
 
-![Alt text](imgs/made_net.png?raw=true "Title")
+![Alt text](imgs/made_net.png)
 
-Masked Autoregressive Density Estimation (MADE) is a deep, generative autoencoder capable of learning hierarchies of distributed representations from data. Its an extension of NADE where all conditional distributions are learnt using a masked variational autoencoder. The masks are generated such that they sustain the autoregressive property of the model by dropping out suitable connections. Our implementation code for MADE with all the conducted experiments can be found in the pytorch-MADE [subfolder](pytorch-MADE).
+MADE is a deep, generative autoencoder capable of learning hierarchies of distributed representations from data. Its an extension of NADE where all conditional distributions are learnt using a masked variational autoencoder. The masks are generated such that they sustain the autoregressive property of the model by dropping out suitable connections. Our implementation code for MADE with all the conducted experiments can be found in the pytorch-MADE [subfolder](pytorch-MADE).
 
 ### 3. GMM (as baseline)
 
