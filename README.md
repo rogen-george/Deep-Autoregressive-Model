@@ -45,7 +45,7 @@ GMM generated sample            |  MADE generated sample
 
 GMM generated sample            |  MADE generated sample
 :-------------------------:|:-------------------------:
-<img src="pytorch-MADE/gmm_atari_sample.png" width="200" height="200">  |   <img src="pytorch-MADE/output_sample_atari1.png" width="200" height="200">
+<img src="pytorch-MADE/gmm_atari_sample.png" width="150" height="200">  |   <img src="pytorch-MADE/output_sample_atari1.png" width="150" height="200">
 
 
 
@@ -53,7 +53,7 @@ GMM generated sample            |  MADE generated sample
 
 GMM generated sample            |  MADE generated sample
 :-------------------------:|:-------------------------:
-<img src="pytorch-MADE/sample_anime_gmm.png" width="200" height="200">  |   <img src="pytorch-MADE/sample_anime_made.png" width="200" height="200">
+<img src="pytorch-MADE/sample_anime_gmm.png" width="250" height="250">  |   <img src="pytorch-MADE/sample_anime_made.png" width="250" height="250">
 
 
 
