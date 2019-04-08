@@ -35,9 +35,9 @@ MADE is a deep, generative autoencoder capable of learning hierarchies of distri
 
 ### 1. MNIST:
 
-Solarized dark             |  Solarized Ocean
+GMM generated sample            |  MADE generated sample
 :-------------------------:|:-------------------------:
-<img src="pytorch-MADE/sample_mnist_gmm.png">  |   <img src="pytorch-MADE/sample_mnist_made.png">
+<img src="pytorch-MADE/sample_mnist_gmm.png" width="100" height="100">  |   <img src="pytorch-MADE/sample_mnist_made.png" width="100" height="100">
 
 
 ### 2. Atari game frames:
