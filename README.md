@@ -8,23 +8,23 @@ The final presentation can be found [here](Project_presentation.pdf) (relative l
 ## Models explored
 ### 1. Neural Autoregressive Density Estimator (NADE):
 
-<img src="imgs/nade_pgm.png" alt="nade_pgm" width="100"/>
+<img src="imgs/nade_pgm.png" alt="nade_pgm" width="300"/>
 
 NADE is a Bayesian Network model for density estimation having an "autoregressive property" in which the full joint probability of all random variables is given as:
 
-![Alt text](imgs/nade_pdf.png)
+<img src="imgs/nade_pdf.png" alt="nade_pdf" width="300"/>
 
 All of the conditional distributions are modelled by a neural network:
 
-![Alt text](imgs/nade_net.png)
+<img src="imgs/nade_net.png" alt="nade_net" width="300"/>
 
-![Alt text](imgs/nade_neteq.png)
+<img src="imgs/nade_neteq.png" alt="nade_neteq" width="300"/>
 
 
 
 ### 2. Masked Autoregressive Density Estimation (MADE):
 
-![Alt text](imgs/made_net.png)
+<img src="imgs/made_net.png" alt="made_net" width="300"/>
 
 MADE is a deep, generative autoencoder capable of learning hierarchies of distributed representations from data. Its an extension of NADE where all conditional distributions are learnt using a masked variational autoencoder. The masks are generated such that they sustain the autoregressive property of the model by dropping out suitable connections. Our implementation code for MADE with all the conducted experiments can be found in the pytorch-MADE [subfolder](pytorch-MADE).
 
