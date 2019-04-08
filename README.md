@@ -16,9 +16,9 @@ NADE is a Bayesian Network model for density estimation having an "autoregressiv
 
 All of the conditional distributions are modelled by a neural network:
 
-<img src="imgs/nade_net.png" alt="nade_net" width="300"/>
+<img src="imgs/nade_net.png" alt="nade_net" width="200"/>
 
-<img src="imgs/nade_neteq.png" alt="nade_neteq" width="300"/>
+<img src="imgs/nade_neteq.png" alt="nade_neteq" width="200"/>
 
 Our implementation code for NADE with all the conducted experiments can be found in the NADE [subfolder](NADE).
 
