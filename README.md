@@ -37,7 +37,7 @@ MADE is a deep, generative autoencoder capable of learning hierarchies of distri
 
 GMM generated sample            |  MADE generated sample
 :-------------------------:|:-------------------------:
-<img src="pytorch-MADE/sample_mnist_gmm.png" width="100" height="100">  |   <img src="pytorch-MADE/sample_mnist_made.png" width="100" height="100">
+<img src="pytorch-MADE/sample_mnist_gmm.png" width="50" height="50">  |   <img src="pytorch-MADE/sample_mnist_made.png" width="100" height="100">
 
 
 
@@ -45,7 +45,7 @@ GMM generated sample            |  MADE generated sample
 
 GMM generated sample            |  MADE generated sample
 :-------------------------:|:-------------------------:
-<img src="pytorch-MADE/gmm_atari_sample.png" width="100" height="100">  |   <img src="pytorch-MADE/output_sample_atari1.png" width="100" height="100">
+<img src="pytorch-MADE/gmm_atari_sample.png" width="100" height="200">  |   <img src="pytorch-MADE/output_sample_atari1.png" width="100" height="200">
 
 
 
@@ -53,7 +53,7 @@ GMM generated sample            |  MADE generated sample
 
 GMM generated sample            |  MADE generated sample
 :-------------------------:|:-------------------------:
-<img src="pytorch-MADE/sample_anime_gmm.png" width="100" height="100">  |   <img src="pytorch-MADE/sample_anime_made.png" width="100" height="100">
+<img src="pytorch-MADE/sample_anime_gmm.png" width="200" height="200">  |   <img src="pytorch-MADE/sample_anime_made.png" width="100" height="100">
 
 
 
