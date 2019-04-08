@@ -8,7 +8,7 @@ The final presentation can be found [here](Project_presentation.pdf) (relative l
 ## Models explored
 ### 1. Neural Autoregressive Density Estimator (NADE):
 
-![](imgs/nade_pgm.png =100x)
+<img src="imgs/nade_pgm.png" alt="nade_pgm" width="100"/>
 
 NADE is a Bayesian Network model for density estimation having an "autoregressive property" in which the full joint probability of all random variables is given as:
 
